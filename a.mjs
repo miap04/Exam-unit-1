@@ -21,7 +21,16 @@ import test from "./test.mjs";
 // Write your function her.
 
 function multiply(a, b) {
-    if (isNaN(a) || isNaN(b) || typeof a !== "number" || typeof b !== "number") {
+    if (a == null || b == null) {
+        return NaN;
+    }
+    if (isNaN(a)) {
+        a = parseInt(a);
+    }
+    if (isNaN(b)) {
+        b = parseInt(b);
+    }
+    if (isNaN(a) || isNaN(b)) {
         return NaN;
     }
     return a * b;
@@ -42,11 +51,12 @@ const tests = test("Sum function");
 tests.isEqual(multiply(1, 2), 2, "Product of 1 and 2 should be 2");
 tests.isEqual(multiply(-5, 5), -25, "Product of -5 and 5 should be -25");
 tests.isEqual(multiply(2.5, 3.5), 8.75, "Product of 2.5 and 3.5 should be 8.75");
-tests.isEqual(multiply(5, 10), 50, "Product of 2, 3 and 4 should be 24");
+tests.isEqual(multiply(5, 10), 50, "Product of 5 and 10 should be 50");
+tests.isEqual(multiply("1", 2), 2, 'Product of "1" and 2 should return 2');
+
 
 
 // Invalid inputs
-tests.isNotANumber(multiply("1", 2), 'Product of "1" and 2 should return NaN');
 tests.isNotANumber(multiply(1, null), "Product of 1 and null should return NaN");
 tests.isNotANumber(multiply(undefined, 3), "Product of undefined and 3 should return NaN");
 
@@ -55,7 +65,6 @@ tests.isNotANumber(multiply(undefined, 3), "Product of undefined and 3 should re
 tests.isEqual(multiply(0, 0), 0, "Product of 0 and 0 should be 0");
 tests.isEqual(multiply(Infinity, 1), Infinity, "Product of Infinity and 1 should be Infinity");
 tests.isEqual(multiply(-Infinity, 1), -Infinity, "Product of -Infinity and 1 should be -Infinity");
-
 
 
 //#endregion
