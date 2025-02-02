@@ -11,7 +11,35 @@ import test from "./test.mjs";
 */
 
 function sequence(n) {
-
+    if (n < 0) {
+        return null;
+    }
+    if (typeof n !== "number") {
+        return null;
+    }
+    if (n % 1 !== 0) {
+        return null;
+    }
+    let num1 = 0;
+    let num2 = 1;
+    let sum;
+    if (n === 0) {
+        return num1;
+    }
+    else if (n === 1) {
+        return num2;
+    }
+    else if (n === 2) {
+        return num2;
+    }
+    else {
+        for (let i = 2; i <= n; i++) {
+            sum = num1 + num2;
+            num1 = num2;
+            num2 = sum;
+        }
+        return num2;
+    }
 }
 
 //#region Tests --------------------------------------------------------------------
