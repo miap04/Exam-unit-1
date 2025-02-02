@@ -20,6 +20,8 @@ import test from "./test.mjs";
 //#region function -----------------------------------------------------------------
 // Write your function her.
 
+function formatName(name) {
+}
 
 
 //#endregion
@@ -31,6 +33,20 @@ import test from "./test.mjs";
 //#region Tests --------------------------------------------------------------------
 // Write your tests her.
 
+const tests = test("Sum function");
 
+// Valid inputs
+tests.isEqual(formatName("mia pedersen"), "Mia Pedersen", "Format 'mia pedersen' should return 'Mia Pedersen'");
+tests.isEqual(formatName("   mia pedersen"), "Mia Pedersen", "Format '   mia pedersen' should return 'Mia Pedersen'");
+tests.isEqual(formatName("mia pedersen   "), "Mia Pedersen", "Format 'mia pedersen   ' should return 'Mia Pedersen'");
+
+// Invalid inputs
+tests.isEqual(formatName(null), null, "Format null should return null");
+tests.isEqual(formatName(123), null, "Format 123 should return null");
+tests.isEqual(formatName("@mia@pede@rsen"), null, "Format '@mia@pede@rsen' should return null");
+
+// Edge cases
+tests.isEqual(formatName(""), "", "Format '' should return ''");
+tests.isEqual(formatName("   "), "", "Format '   ' should return ''");
 
 //#endregion
