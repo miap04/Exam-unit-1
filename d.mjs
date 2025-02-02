@@ -31,16 +31,25 @@ function guessNumber(target, guess) {
 //#endregion
 
 //#region Tests --------------------------------------------------------------------
+const tests = test("Sum function");
 
 // Basic cases
-test.isEqual(guessNumber(10, 5), "Too low", "If target is 10 and guess is 5, return 'Too low'");
-test.isEqual(guessNumber(10, 15), "Too high", "If target is 10 and guess is 15, return 'Too high'");
-test.isEqual(guessNumber(10, 10), "Correct!", "If target is 10 and guess is 10, return 'Correct!'");
+tests.isEqual(guessNumber(10, 5), "Too low", "If target is 10 and guess is 5, return 'Too low'");
+tests.isEqual(guessNumber(10, 15), "Too high", "If target is 10 and guess is 15, return 'Too high'");
+tests.isEqual(guessNumber(10, 10), "Correct!", "If target is 10 and guess is 10, return 'Correct!'");
 
 // Invalid inputs
-
+tests.isEqual(guessNumber("10", 10), NaN, 'If target is "10" and guess is 10, return null');
+tests.isEqual(guessNumber(10, "10"), NaN, 'If target is 10 and guess is "10", return null');
+tests.isEqual(guessNumber(null, 10), NaN, "If target is null and guess is 10, return null");
+tests.isEqual(guessNumber(10, null), NaN, "If target is 10 and guess is null, return null");
 
 // Edge cases
+tests.isEqual(guessNumber(0, 0), "Correct", "If target is 0 and guess is 0, return 'Correct'");
+tests.isEqual(guessNumber(0, -1), "Too low", "If target is 0 and guess is -1, return 'Too low'");
+tests.isEqual(guessNumber(Infinity, Infinity), "Correct", "If target is Infinity and guess is Infinity, return 'Correct'");
+tests.isEqual(guessNumber(-Infinity, -Infinity), "Correct", "If target is -Infinity and guess is -Infinity, return 'Correct'");
+tests.isEqual(guessNumber(10.5, 10), null, "Non-integer input should return null");
 
 
 //#endregion
