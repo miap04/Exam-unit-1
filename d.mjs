@@ -24,7 +24,25 @@ import test from "./test.mjs";
 // Write your function her.
 
 function guessNumber(target, guess) {
-
+    if (typeof target !== "number" || typeof guess !== "number") {
+        return null;
+    }
+    if (target === Infinity && guess === Infinity) {
+        return "Correct";
+    }
+    if (target === -Infinity && guess === -Infinity) {
+        return "Correct";
+    }
+    if (target % 1 !== 0 || guess % 1 !== 0) {
+        return null;
+    }
+    if (guess < target) {
+        return "Too low";
+    } else if (guess > target) {
+        return "Too high";
+    } else {
+        return "Correct";
+    }
 }
 
 
@@ -36,13 +54,13 @@ const tests = test("Sum function");
 // Basic cases
 tests.isEqual(guessNumber(10, 5), "Too low", "If target is 10 and guess is 5, return 'Too low'");
 tests.isEqual(guessNumber(10, 15), "Too high", "If target is 10 and guess is 15, return 'Too high'");
-tests.isEqual(guessNumber(10, 10), "Correct!", "If target is 10 and guess is 10, return 'Correct!'");
+tests.isEqual(guessNumber(10, 10), "Correct", "If target is 10 and guess is 10, return 'Correct'");
 
 // Invalid inputs
-tests.isEqual(guessNumber("10", 10), NaN, 'If target is "10" and guess is 10, return null');
-tests.isEqual(guessNumber(10, "10"), NaN, 'If target is 10 and guess is "10", return null');
-tests.isEqual(guessNumber(null, 10), NaN, "If target is null and guess is 10, return null");
-tests.isEqual(guessNumber(10, null), NaN, "If target is 10 and guess is null, return null");
+tests.isEqual(guessNumber("10", 10), null, 'If target is "10" and guess is 10, return null');
+tests.isEqual(guessNumber(10, "10"), null, 'If target is 10 and guess is "10", return null');
+tests.isEqual(guessNumber(null, 10), null, "If target is null and guess is 10, return null");
+tests.isEqual(guessNumber(10, null), null, "If target is 10 and guess is null, return null");
 
 // Edge cases
 tests.isEqual(guessNumber(0, 0), "Correct", "If target is 0 and guess is 0, return 'Correct'");
