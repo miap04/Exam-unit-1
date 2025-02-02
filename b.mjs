@@ -21,6 +21,39 @@ import test from "./test.mjs";
 // Write your function her.
 
 function formatName(name) {
+    if (typeof name !== "string") {
+        return null;
+    }
+    name = name.trim();
+    if (name === "") {
+        return null;
+    }
+    if (name.includes("@") || name.includes("#") || name.includes("$") || name.includes("%") || name.includes("^") || name.includes("&") || name.includes("*") || name.includes("(") || name.includes(")") || name.includes("-") || name.includes("_") || name.includes("+") || name.includes("=") || name.includes("{") || name.includes("}") || name.includes("[") || name.includes("]") || name.includes(":") || name.includes(";") || name.includes("'") || name.includes('"') || name.includes("<") || name.includes(">") || name.includes(",") || name.includes(".") || name.includes("?") || name.includes("/") || name.includes("|") || name.includes("\\")) {
+        return null;
+    }
+    let firstName = name.split(" ")[0];
+    let lastName = name.split(" ")[1];
+    let firstNameLetters = firstName.split("");
+    let lastNameLetters = lastName.split("");
+    for (let i = 0; i < firstNameLetters.length; i++) {
+        if (i === 0) {
+            firstNameLetters[i] = firstNameLetters[i].toUpperCase();
+        } else {
+            firstNameLetters[i] = firstNameLetters[i].toLowerCase();
+        }
+    }
+    for (let i = 0; i < lastNameLetters.length; i++) {
+        if (i === 0) {
+            lastNameLetters[i] = lastNameLetters[i].toUpperCase();
+        }
+        else {
+            lastNameLetters[i] = lastNameLetters[i].toLowerCase();
+        }
+    }
+    firstName = firstNameLetters.join("");
+    lastName = lastNameLetters.join("");
+    let formattedName = firstName + " " + lastName;
+    return formattedName;
 }
 
 
@@ -39,6 +72,7 @@ const tests = test("Sum function");
 tests.isEqual(formatName("mia pedersen"), "Mia Pedersen", "Format 'mia pedersen' should return 'Mia Pedersen'");
 tests.isEqual(formatName("   mia pedersen"), "Mia Pedersen", "Format '   mia pedersen' should return 'Mia Pedersen'");
 tests.isEqual(formatName("mia pedersen   "), "Mia Pedersen", "Format 'mia pedersen   ' should return 'Mia Pedersen'");
+tests.isEqual(formatName("MiA pEderSeN"), "Mia Pedersen", "Format 'MiA pEderSeN' should return 'Mia Pedersen'");
 
 // Invalid inputs
 tests.isEqual(formatName(null), null, "Format null should return null");
@@ -46,7 +80,7 @@ tests.isEqual(formatName(123), null, "Format 123 should return null");
 tests.isEqual(formatName("@mia@pede@rsen"), null, "Format '@mia@pede@rsen' should return null");
 
 // Edge cases
-tests.isEqual(formatName(""), "", "Format '' should return ''");
-tests.isEqual(formatName("   "), "", "Format '   ' should return ''");
+tests.isEqual(formatName(""), null, "Format '' should return null");
+tests.isEqual(formatName("   "), null, "Format '   ' should return null");
 
 //#endregion
